@@ -1,6 +1,5 @@
 "use strict";
 
-import "./a.js";
 import "./b.js";
 import "./c.js";
 
@@ -10,10 +9,8 @@ require.ensure([], function(){
 
 var pathname = (window.location.pathname||'').replace(/\..*/, '').replace(/^\//, '');
 
-console.log(pathname);
+window.console && console.log(['import', pathname].join(' '));
 
 var path = [(pathname || 'd'), '.js'].join('');
 
-console.log(path)
-
-System.import('./' + path);
+pathname && System.import('./' + path);

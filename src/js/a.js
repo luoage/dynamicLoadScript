@@ -1,1 +1,1 @@
-console.log('00iii');
+console.log('iii');
