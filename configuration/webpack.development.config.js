@@ -26,18 +26,21 @@ module.exports = {
 			{ 
 				test : /\.less$/,
 				loader: extractTextPlugin.extract({
-					loader : '!css!less'
+					loader: 'css!less'
 				})
 			}
 		]
 	},
 
 	plugins: [
-		new extractTextPlugin('[name].css'),
+		new webpack.HotModuleReplacementPlugin(),
+		new extractTextPlugin({
+			filename: '[name].a.css',
+			allChunks: true
+		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'manifest'
-		}),
-		new webpack.HotModuleReplacementPlugin()
+		})
 	],
 
 	resolve : {
