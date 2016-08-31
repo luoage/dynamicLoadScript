@@ -1,16 +1,12 @@
-"use strict";
+'use strict';
 
-import "./b.js";
-import "./c.js";
+function init() {
+	var pathname = (window.location.pathname || '').replace(/\..*/, '').replace(/^\//, '');
 
-require.ensure([], function(){
-	console.log('tst');
-});
+	window.console && console.log(['import', pathname].join(' '));
+	var path = [(pathname || 'd'), '.js'].join('');
 
-var pathname = (window.location.pathname||'').replace(/\..*/, '').replace(/^\//, '');
+	pathname && System.import('./' + path);
+}
 
-window.console && console.log(['import', pathname].join(' '));
-
-var path = [(pathname || 'd'), '.js'].join('');
-
-pathname && System.import('./' + path);
+init();

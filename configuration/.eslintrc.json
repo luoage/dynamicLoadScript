@@ -1,0 +1,47 @@
+{
+  "extends":"standard",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": 0
+    }
+  },
+
+  "env": {
+    "browser" : true,
+    "es6": true,
+    "commonjs": true,
+    "node": 0
+  },
+
+  "plugins": [
+  ],
+
+  "globals": {
+  },
+
+  "rules": {
+    "linebreak-style": [2, "unix"],
+    "no-alert": 2,
+    "semi": [2, "always"],
+    "space-before-function-paren": [2, "never"],
+    "block-scoped-var": 2,
+    "one-var": 2,
+    "one-var-declaration-per-line": 2,
+    "no-multiple-empty-lines": [2, { "maxBOF": 0, "max": 2, "maxEOF": 0 }],
+    "max-len": [2, 115, 4, {
+        "comments": 80
+    }],
+    "max-depth": [2, { "max": 4 }],
+    "max-params": [2, { "max": 4 }],
+    "max-statements": [2, { "max": 8 }],
+    "complexity": [2, { "max": 3 }],
+    "newline-after-var":[2, "always"],
+    "no-tabs":0,
+    "indent": [2, "tab"],
+    "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
+		"wrap-iife": [2, "outside"],
+		"no-lonely-if": 2,
+		"brace-style": [2, "1tbs", {"allowSingleLine": false}],
+		"curly": [2, "all"]
+  }
+}
