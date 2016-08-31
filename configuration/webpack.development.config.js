@@ -1,31 +1,48 @@
-/* global __dirname:true */
 'use strict';
+
 // development
 
-var webpack = require('webpack'); // TODO 使用全局webpack
+let webpack = require('webpack');
+let path = require('path');
+let outpath = path.resolve('dist');
+let extractTextPlugin = require('extract-text-webpack-plugin');
 
-var path = require('path');
-var outpath = path.join(__dirname, '../dist');
 
 module.exports = {
 
 	entry: {
-		main: [ './src/js/index' ]
+		main: './src/js/index'
 	},
 
 	output: {
-		publicPath: '/asserts/', // 发布路径
+		publicPath: '/asserts/',
 		path: outpath,
 		filename: '[name].js',
 		chunkFilename: '[chunkhash].js'
 	},
 
+	module: {
+		loaders : [
+			{ 
+				test : /\.less$/,
+				loader: extractTextPlugin.extract({
+					loader : '!css!less'
+				})
+			}
+		]
+	},
+
 	plugins: [
+		new extractTextPlugin('[name].css'),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'manifest'
 		}),
-		new webpack.HotModuleReplacementPlugin() // 启用热加载模式
+		new webpack.HotModuleReplacementPlugin()
 	],
+
+	resolve : {
+		root: path.resolve('src')
+	},
 
 	devServer: {
 		progress: true,
