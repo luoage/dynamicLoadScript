@@ -2,3 +2,5 @@ template/*
 dist/*
 node_modules/*
 src/css/*
+unitTest/*
+docs/*

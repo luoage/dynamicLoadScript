@@ -1,9 +1,8 @@
 'use strict';
 
-
 let webpack = require('webpack');
 let path = require('path');
-let outpath = path.resolve('dist');
+let outpath = path.resolve('./dist');
 
 
 module.exports = {
@@ -29,7 +28,7 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin()
 	],
 
-	resolve : {
+	resolve: {
 	},
 
 	devServer: {

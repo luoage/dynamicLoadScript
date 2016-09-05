@@ -29,7 +29,7 @@
     "one-var-declaration-per-line": 2,
     "no-multiple-empty-lines": [2, { "maxBOF": 0, "max": 2, "maxEOF": 0 }],
     "max-len": [2, 115, 4, {
-        "comments": 80
+        "comments": 180
     }],
     "max-depth": [2, { "max": 4 }],
     "max-params": [2, { "max": 4 }],
@@ -42,8 +42,6 @@
 	"no-lonely-if": 2,
 	"brace-style": [2, "1tbs", {"allowSingleLine": false}],
 	"curly": [2, "all"],
-	"no-console": 2,
-	"no-debugger": 2,
-	"strict": [2, "global"]
+	"no-debugger": 2
   }
 }

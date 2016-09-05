@@ -4,7 +4,7 @@
   "description": "shop",
   "main": "index.js",
   "scripts": {
-    "test": "exit 1",
+    "test": "./node_modules/.bin/mocha unitTest/js/ || true",
     "lint": "./node_modules/.bin/eslint --cache --cache-location=./.eslint-cache --color ./ && echo 'well done !' || true",
     "dev": "./node_modules/.bin/webpack-dev-server",
     "build:dev": "./node_modules/.bin/webpack || true"
@@ -14,12 +14,13 @@
   ],
   "author": "luoage@msn.cn",
   "private": true,
-  "dependencies": {
-    "gulp": "^3.9.1",
-    "gulp-less": "^3.1.0",
-    "less-plugin-autoprefix": "^1.5.1"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jsdoc3": "^0.3.0",
+    "gulp-less": "^3.1.0",
+    "less-plugin-autoprefix": "^1.5.1",
+    "mocha": "^3.0.2",
     "eslint": "^3.4.0",
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
