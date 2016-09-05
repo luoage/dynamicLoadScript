@@ -34,14 +34,16 @@
     "max-depth": [2, { "max": 4 }],
     "max-params": [2, { "max": 4 }],
     "max-statements": [2, { "max": 8 }],
-    "complexity": [2, { "max": 3 }],
     "newline-after-var":[2, "always"],
     "no-tabs":0,
     "indent": [2, "tab"],
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
-		"wrap-iife": [2, "outside"],
-		"no-lonely-if": 2,
-		"brace-style": [2, "1tbs", {"allowSingleLine": false}],
-		"curly": [2, "all"]
+	"wrap-iife": [2, "outside"],
+	"no-lonely-if": 2,
+	"brace-style": [2, "1tbs", {"allowSingleLine": false}],
+	"curly": [2, "all"],
+	"no-console": 2,
+	"no-debugger": 2,
+	"strict": [2, "global"]
   }
 }

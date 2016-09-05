@@ -5,24 +5,25 @@
   "main": "index.js",
   "scripts": {
     "test": "exit 1",
-    "lint": "./node_modules/.bin/eslint -c ./configuration/.eslintrc.json --cache --cache-location=./.eslint-cache --color --ignore-path ./configuration/.eslintignore ./ && echo 'well done !' || true",
-    "dev": "./node_modules/.bin/webpack-dev-server --config ./configuration/webpack.development.config.js",
-    "build:dev": "./node_modules/.bin/webpack --config ./configuration/webpack.development.config.js || true"
+    "lint": "./node_modules/.bin/eslint --cache --cache-location=./.eslint-cache --color ./ && echo 'well done !' || true",
+    "dev": "./node_modules/.bin/webpack-dev-server",
+    "build:dev": "./node_modules/.bin/webpack || true"
   },
   "keywords": [
     "shop"
   ],
   "author": "luoage@msn.cn",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.1.0",
+    "less-plugin-autoprefix": "^1.5.1"
+  },
   "devDependencies": {
-    "css-loader": "webpack/css-loader",
     "eslint": "^3.4.0",
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
-    "extract-text-webpack-plugin": "^2.0.0-beta.3",
-    "less-loader": "webpack/less-loader",
     "webpack": "^2.1.0-beta.21",
     "webpack-dev-server": "^2.1.0-beta.0"
   }

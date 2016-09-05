@@ -1,11 +1,9 @@
 'use strict';
 
-// development
 
 let webpack = require('webpack');
 let path = require('path');
 let outpath = path.resolve('dist');
-let extractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = {
@@ -22,29 +20,16 @@ module.exports = {
 	},
 
 	module: {
-		loaders : [
-			{ 
-				test : /\.less$/,
-				loader: extractTextPlugin.extract({
-					loader: 'css!less'
-				})
-			}
-		]
 	},
 
 	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new extractTextPlugin({
-			filename: '[name].a.css',
-			allChunks: true
-		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'manifest'
-		})
+		}),
+		new webpack.HotModuleReplacementPlugin()
 	],
 
 	resolve : {
-		root: path.resolve('src')
 	},
 
 	devServer: {
