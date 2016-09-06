@@ -7,7 +7,7 @@ import convert from 'koa-convert';
 import Router from 'koa-router';
 
 var app = new Koa();
-var route = new Router();
+var router = Router();
 
 // 注意：middleware是有顺序的
 
@@ -29,16 +29,29 @@ app.use(session({
 
 app.use(convert(csrf()));
 
-
+/*
 app.use(async (ctx) => {
 	ctx.session.user = '2222';
 
 	// console.log(ctx.csrf, 'csrf');
 	// console.log(ctx.session, 'session');
 
-	ctx.body = 'hello koa';
+	// ctx.body = 'hello koa';
+});
+*/
+
+router.get('/list', (ctx) => {
+	ctx.body = '2222';
 });
 
+router.get('/', (ctx) => {
+	ctx.body = '2222----------index';
+});
+
+router.use('/user', router.routes());
+
+
+app.use(router.routes());
 
 app.listen(3000, function() {
 	console.log('start at 3000 port !');
