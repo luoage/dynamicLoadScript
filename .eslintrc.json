@@ -1,5 +1,5 @@
 {
-	"parser": "babel-eslint",
+    "parser": "babel-eslint",
   "extends":"standard",
   "parserOptions": {
     "ecmaFeatures": {
@@ -21,6 +21,7 @@
   },
 
   "rules": {
+    "strict": [2, "global"],
     "linebreak-style": [2, "unix"],
     "no-alert": 2,
     "semi": [2, "always"],
@@ -39,10 +40,10 @@
     "no-tabs":0,
     "indent": [2, "tab"],
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
-	"wrap-iife": [2, "outside"],
-	"no-lonely-if": 2,
-	"brace-style": [2, "1tbs", {"allowSingleLine": false}],
-	"curly": [2, "all"],
-	"no-debugger": 2
+    "wrap-iife": [2, "outside"],
+    "no-lonely-if": 2,
+    "brace-style": [2, "1tbs", {"allowSingleLine": false}],
+    "curly": [2, "all"],
+    "no-debugger": 2
   }
 }
