@@ -25,12 +25,13 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'manifest'
 		}),
-		new webpack.HotModuleReplacementPlugin()
+		// new webpack.HotModuleReplacementPlugin()
 	],
 
 	resolve: {
 	},
 
+	/*
 	devServer: {
 		progress: true,
 		contentBase: './template/',
@@ -40,4 +41,5 @@ module.exports = {
 		hot: true,
 		publicPath: '/asserts/'
 	}
+	*/
 };

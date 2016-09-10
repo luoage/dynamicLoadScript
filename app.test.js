@@ -1,6 +1,6 @@
-import fs from 'fs';
 
 /*
+import fs from 'fs';
 var b = function(cb) {
 	cb();
 };
@@ -17,6 +17,7 @@ try {
 }
 */
 
+/*
 var readFile = function() {
 	return new Promise((resolve, reject) => {
 		fs.readFile('/etc/passwd', function(err, data){
@@ -38,6 +39,7 @@ var as = function*() {
 
 	console.log(a, data, 'data');
 };
+*/
 
 /*
 var generator = as();
@@ -50,6 +52,7 @@ generator.next().value.then((data) => {
 // console.dir(generator.next());
 */
 
+/*
 var as1 = async function() {
 
 	var a = 1;
@@ -71,4 +74,14 @@ as1().then( (data) => {
 	console.log(data);
 }, (e) => {
 	console.log(e);
+});
+*/
+
+var path = require('path');
+var glob = require('glob');
+var p = '/app/**/';
+console.log(p);
+
+glob(p, {root:'./'}, (err, files) => {
+	console.log(files);
 });

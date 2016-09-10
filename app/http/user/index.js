@@ -3,7 +3,7 @@
 var user = {
 
 	list: (ctx) => {
-		ctx.body = 'auiiabc--jl------';
+		ctx.body = 'iiiii------';
 	}
 
 };

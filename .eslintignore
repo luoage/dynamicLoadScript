@@ -4,3 +4,4 @@ node_modules/*
 src/css/*
 unitTest/*
 docs/*
+app.test.js

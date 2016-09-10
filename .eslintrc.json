@@ -11,7 +11,7 @@
     "browser" : true,
     "es6": true,
     "commonjs": true,
-    "node": 0
+    "node": true
   },
 
   "plugins": [
@@ -21,7 +21,6 @@
   },
 
   "rules": {
-    "strict": [2, "global"],
     "linebreak-style": [2, "unix"],
     "no-alert": 2,
     "semi": [2, "always"],

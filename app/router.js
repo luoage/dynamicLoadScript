@@ -1,5 +1,7 @@
+'use strict';
+
 // utilities
-import router from './class/router';
+import Router from './class/router';
 
 
 // controller
@@ -7,7 +9,7 @@ import user from './http/user/';
 import customer from './http/customer/';
 
 
-var rts = new router();
+var rts = new Router();
 
 
 rts.group({ namespace: '/user' }, (rt) => {

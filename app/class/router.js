@@ -33,6 +33,6 @@ class router {
 
 		this.router.use(namespace, ...args, router.routes(), router.allowedMethods());
 	}
-};
+}
 
 module.exports = router;

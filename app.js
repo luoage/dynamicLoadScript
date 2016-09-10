@@ -1,13 +1,21 @@
+'use strict';
+
 import Koa from 'koa';
 import session from 'koa-session2';
 import csrf from 'koa-csrf';
 import convert from 'koa-convert';
 import views from 'koa-views';
-import fs from 'fs';
 import path from 'path';
 
-// TODO 错误捕获
+import ub from './app/utility/base';
 
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+// TODO catch errors
+// TODO static files
+
+const isDev = process.env.NODE_ENV === 'development'
 var app = new Koa();
 
 
@@ -20,6 +28,9 @@ app.use(async (ctx, next) => {
 
 	console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
+
+
+isDev && app.use(convert(require('koa-static')('./dist')));
 
 
 app.use(session({
@@ -41,52 +52,23 @@ app.use(async (ctx, next) => {
 });
 
 
-app.listen(3000, function() {
+app.listen(3000, () => {
 	console.log('start at port 3000 !');
 });
 
 
-// TODO watch base directory
-hotLoad( ['./app/', './app/http/', './app/http/user/', './app/http/customer/'], (eventType, filePath) => {
-	clearCache(path.resolve(__dirname, './app/router.js'));
-	console.log(eventType, ' ', filePath);
+// hot reload
+isDev && ub.readDir('./app/**/', {root: './'}).then((files) => {
+	ub.hotLoad(files, (eventType, filePath) => {
+		var route = path.resolve(__dirname, './app/router.js');
+
+		ub.clearCache(route);
+		console.log(eventType, ' ', filePath);
+	});
 });
 
+// front end javascript
+var webpack = require('webpack');
+var wpConfig = require('./webpack.development.config');
 
-// TODO await/async
-function hotLoad(dirs, cb){
-	dirs = Array.isArray(dirs) ? dirs : [dirs];
-
-	var prevFile;
-	var timeout;
-
-	dirs.forEach((dir) => {
-		fs.watch(dir, {recursive:false}, (eventType, filename) => {
-			var filePath = path.resolve(__dirname, dir, filename);
-
-			if (prevFile === filePath && timeout){
-				clearTimeout(timeout);
-			}
-
-			timeout = setTimeout(() => {
-				clearCache(filePath);
-				cb && cb(eventType, filePath);
-			}, 50);
-
-			prevFile = filePath;
-		});
-	});
-}
-
-
-function clearCache(filePath){
-	var module = require.cache[filePath];
-
-	if (!module) return;
-
-	if (module.parent) {
-		module.parent.children.splice(module.parent.children.indexOf(module), 1);
-	}
-
-	require.cache[filePath] = null;
-}
+console.log( webpack(wpConfig) )
