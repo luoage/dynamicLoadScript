@@ -6,8 +6,7 @@ import views from 'koa-views';
 import fs from 'fs';
 import path from 'path';
 
-
-var routerUser = require('./app/router');
+// TODO 错误捕获
 
 var app = new Koa();
 
@@ -31,13 +30,14 @@ app.use(session({
 app.use(convert(csrf()));
 
 
-app.use(views(`${__dirname}/template`, {
+app.use(views(path.resolve(__dirname, 'template'), {
 	map: {html: 'handlebars'},
 	extension: 'html'
 }));
 
-app.use(() => {
-	routerUser.routes().apply(routerUser, arguments);
+
+app.use((ctx, next) => {
+	require('./app/router').routes()(ctx, next);
 });
 
 
@@ -45,25 +45,34 @@ app.listen(3000, function() {
 	console.log('start at port 3000 !');
 });
 
-fs.watch('./app/http/user', (eventType, filename) => {
-	var filePath = path.resolve(__dirname, './app/http/user', filename);
 
-	clearCache(filePath);
-});
+// TODO watch base directory
+hotLoad(['./app/', './app/http/', './app/http/user/', './app/http/customer/']);
 
-setInterval(() => {
-	clearCache('./app/router');
 
-	try {
-		routerUser = require('./app/router');
-	} catch(e) {
-		console.error('route update false');
+function hotLoad(dirs){
+	dirs = Array.isArray(dirs) ? dirs : [dirs];
+
+	dirs.forEach((dir) => {
+		fs.watch(dir, {recursive:false}, (eventType, filename) => {
+			var filePath = path.resolve(__dirname, dir, filename);
+
+			clearCache(filePath);
+			clearCache('./app/router.js');
+		});
+	});
+}
+
+
+function clearCache(path){
+	var filePath = require.resolve(path);
+	var module = require.cache[filePath];
+
+	if (!module) return;
+
+	if (module.parent) {
+		module.parent.children.splice(module.parent.children.indexOf(module), 1);
 	}
-}, 1000);
-
-function clearCache(module){
-	var filePath = require.resolve(module)
-
 
 	require.cache[filePath] = null;
 }

@@ -1,7 +1,7 @@
 /**
  * 封装路由
  *
- * by jl
+ * by luoage@msn.cn
  */
 
 import Router from 'koa-router';
@@ -35,4 +35,4 @@ class router {
 	}
 };
 
-export default router;
+module.exports = router;
