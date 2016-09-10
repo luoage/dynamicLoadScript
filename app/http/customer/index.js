@@ -1,12 +1,10 @@
 
-export default {
+var customer = {
 	list: async (ctx) => {
-		console.log('22222');
-		ctx.body = 'aaaaaaaabb---';
-		/*
-		await ctx.render('a', {a:'xxxxxyxxxxx'}).catch((e) => {
+		await ctx.render('a', {a:'lst-'}).catch((e) => {
 			console.log(e.stack);
 		})
-		*/
 	}
 };
+
+module.exports = customer;

@@ -1,9 +1,11 @@
 'use strict';
 
-export default {
+var user = {
 
 	list: (ctx) => {
 		ctx.body = 'auiiabc--jl------';
 	}
 
 };
+
+module.exports = user;

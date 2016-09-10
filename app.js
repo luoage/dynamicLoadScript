@@ -36,8 +36,8 @@ app.use(views(path.resolve(__dirname, 'template'), {
 }));
 
 
-app.use((ctx, next) => {
-	require('./app/router').routes()(ctx, next);
+app.use(async (ctx, next) => {
+	await require('./app/router').routes()(ctx, next);
 });
 
 
@@ -47,10 +47,12 @@ app.listen(3000, function() {
 
 
 // TODO watch base directory
-hotLoad(['./app/', './app/http/', './app/http/user/', './app/http/customer/']);
+hotLoad( ['./app/', './app/http/', './app/http/user/', './app/http/customer/'], () => {
+	clearCache('./app/router.js');
+});
 
 
-function hotLoad(dirs){
+function hotLoad(dirs, cb){
 	dirs = Array.isArray(dirs) ? dirs : [dirs];
 
 	dirs.forEach((dir) => {
@@ -58,7 +60,7 @@ function hotLoad(dirs){
 			var filePath = path.resolve(__dirname, dir, filename);
 
 			clearCache(filePath);
-			clearCache('./app/router.js');
+			cb && cb();
 		});
 	});
 }
