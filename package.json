@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha unitTest/js/ || true",
     "lint": "./node_modules/.bin/eslint --cache --cache-location=./.eslint-cache --color ./ && echo 'well done !' || true",
-    "dev": "./node_modules/.bin/webpack-dev-server",
+    "dev": "node ./index || true",
     "build:dev": "./node_modules/.bin/webpack --config webpack.development.config.js || true"
   },
   "keywords": [
@@ -29,7 +29,8 @@
     "koa-router": "^7.0.1",
     "koa-session2": "^1.0.8",
     "koa-static": "^2.0.0",
-    "koa-views": "^5.0.2"
+    "koa-views": "^5.0.2",
+    "glob": "^7.0.6"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
@@ -37,13 +38,12 @@
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
-    "glob": "^7.0.6",
     "gulp": "^3.9.1",
     "gulp-jsdoc3": "^0.3.0",
     "gulp-less": "^3.1.0",
+    "koa-webpack-middleware": "^1.0.1",
     "less-plugin-autoprefix": "^1.5.1",
     "mocha": "^3.0.2",
-    "webpack": "^2.1.0-beta.21",
-    "webpack-dev-server": "^2.1.0-beta.0"
+    "webpack": "^2.1.0-beta.21"
   }
 }

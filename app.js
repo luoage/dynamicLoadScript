@@ -12,8 +12,9 @@ import ub from './app/utility/base';
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+
 // TODO catch errors
-// TODO static files
+
 
 const isDev = process.env.NODE_ENV === 'development'
 var app = new Koa();
@@ -57,7 +58,6 @@ app.listen(3000, () => {
 });
 
 
-// hot reload
 isDev && ub.readDir('./app/**/', {root: './'}).then((files) => {
 	ub.hotLoad(files, (eventType, filePath) => {
 		var route = path.resolve(__dirname, './app/router.js');
@@ -67,8 +67,7 @@ isDev && ub.readDir('./app/**/', {root: './'}).then((files) => {
 	});
 });
 
-// front end javascript
-var webpack = require('webpack');
-var wpConfig = require('./webpack.development.config');
 
-console.log( webpack(wpConfig) )
+isDev && app.use(require('koa-webpack-middleware').devMiddleware(
+	require('webpack')(require('./webpack.development.config')), {publicPath: '/js/'}
+));
