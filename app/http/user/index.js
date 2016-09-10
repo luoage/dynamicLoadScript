@@ -3,7 +3,7 @@
 export default {
 
 	list: (ctx) => {
-		ctx.body = 'user---------------------';
+		ctx.body = 'auiiabc';
 	}
 
 };

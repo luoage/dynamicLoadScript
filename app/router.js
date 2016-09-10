@@ -10,7 +10,7 @@ import customer from './http/customer/';
 var rts = new router();
 
 
-rts.group({ namespace: '/user', prefix: '/abc' }, (rt) => {
+rts.group({ namespace: '/user' }, (rt) => {
 	rt.get('/list', user.list);
 	rt.get('/abc', user.list);
 	rt.get('/abcd', user.list);
@@ -24,4 +24,4 @@ rts.group({ namespace: '/customer' }, (rt) => {
 });
 
 
-export default rts.router;
+module.exports = rts.router;
