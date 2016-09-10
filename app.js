@@ -48,7 +48,7 @@ app.listen(3000, function() {
 
 // TODO watch base directory
 hotLoad( ['./app/', './app/http/', './app/http/user/', './app/http/customer/'], (eventType, filePath) => {
-	clearCache('./app/router.js');
+	clearCache(path.resolve(__dirname, './app/router.js'));
 	console.log(eventType, ' ', filePath);
 });
 
@@ -79,8 +79,7 @@ function hotLoad(dirs, cb){
 }
 
 
-function clearCache(path){
-	var filePath = require.resolve(path);
+function clearCache(filePath){
 	var module = require.cache[filePath];
 
 	if (!module) return;
