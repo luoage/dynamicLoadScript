@@ -47,20 +47,33 @@ app.listen(3000, function() {
 
 
 // TODO watch base directory
-hotLoad( ['./app/', './app/http/', './app/http/user/', './app/http/customer/'], () => {
+hotLoad( ['./app/', './app/http/', './app/http/user/', './app/http/customer/'], (eventType, filePath) => {
 	clearCache('./app/router.js');
+	console.log(eventType, ' ', filePath);
 });
 
 
+// TODO await/async
 function hotLoad(dirs, cb){
 	dirs = Array.isArray(dirs) ? dirs : [dirs];
+
+	var prevFile;
+	var timeout;
 
 	dirs.forEach((dir) => {
 		fs.watch(dir, {recursive:false}, (eventType, filename) => {
 			var filePath = path.resolve(__dirname, dir, filename);
 
-			clearCache(filePath);
-			cb && cb();
+			if (prevFile === filePath && timeout){
+				clearTimeout(timeout);
+			}
+
+			timeout = setTimeout(() => {
+				clearCache(filePath);
+				cb && cb(eventType, filePath);
+			}, 50);
+
+			prevFile = filePath;
 		});
 	});
 }
