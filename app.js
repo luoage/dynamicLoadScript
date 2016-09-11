@@ -60,7 +60,7 @@ app.listen(3000, () => {
 
 isDev && ub.readDir('./app/**/', {root: './'}).then((files) => {
 	ub.hotLoad(files, (eventType, filePath) => {
-		var route = path.resolve(__dirname, './app/router.js');
+		const route = path.resolve(__dirname, './app/router.js');
 
 		ub.clearCache(route);
 		console.log(eventType, ' ', filePath);
@@ -69,5 +69,9 @@ isDev && ub.readDir('./app/**/', {root: './'}).then((files) => {
 
 
 isDev && app.use(require('koa-webpack-middleware').devMiddleware(
-	require('webpack')(require('./webpack.development.config')), {publicPath: '/js/'}
+	require('webpack')(require('./webpack.development.config')),
+	{
+		publicPath: '/js/',
+		quiet: true
+	}
 ));

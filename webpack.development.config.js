@@ -6,6 +6,7 @@ let outpath = path.resolve('./dist/js');
 
 
 module.exports = {
+	devtool: 'inline-source-map',
 
 	entry: {
 		main: './src/js/index'
@@ -24,8 +25,7 @@ module.exports = {
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'manifest'
-		}),
-		new webpack.HotModuleReplacementPlugin()
+		})
 	]
 
 };

@@ -20,7 +20,7 @@ rts.group({ namespace: '/user' }, (rt) => {
 
 rts.group({ namespace: '/customer' }, (rt) => {
 	rt.get('/', customer.list);
-	rt.get('/list', customer.list);
+	rt.get('/ls2', customer.ls2);
 	rt.get('/abc', customer.list);
 	rt.get('/abcd', customer.list);
 });
