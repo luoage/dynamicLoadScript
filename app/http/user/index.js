@@ -2,8 +2,12 @@
 
 var user = {
 
-	list: (ctx) => {
-		ctx.body = 'iiiii------';
+	list: async (ctx) => {
+		await ctx.render('user', {
+			partials: {
+				layout: 'layout'
+			}
+		});
 	}
 
 };
