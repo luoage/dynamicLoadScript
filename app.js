@@ -7,8 +7,10 @@ import convert from 'koa-convert';
 import views from 'koa-views';
 import path from 'path';
 import Debug from 'debug';
+import handlebars from 'handlebars';
 
 import ub from './app/utility/base';
+import hbsPartial from './app/handlebars/partials';
 
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -20,8 +22,15 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const isDev = process.env.NODE_ENV === 'development'
 var app = new Koa();
 var debug = Debug('shop');
+var temPath = path.resolve(__dirname, 'template');
+var temOptions = {
+	map: {
+		hbs: 'handlebars'
+	},
+	extension: 'hbs',
+	cache: !isDev
+};
 
-debug('debug start--------');
 
 app.use(async (ctx, next) => {
 	const start = new Date();
@@ -45,10 +54,27 @@ app.use(session({
 app.use(convert(csrf()));
 
 
-app.use(views(path.resolve(__dirname, 'template'), {
-	map: {hbs: 'handlebars'},
-	extension: 'hbs'
-}));
+app.use(views(temPath, temOptions));
+
+
+// add handlebars partials, it must be before routers
+isDev ?  app.use(async (ctx, next) => {
+	handlebars.partials = {};
+
+	var partials = await require('./app/handlebars/partials')(temPath, temOptions);
+
+	Object.keys(partials).forEach((key) => {
+		debug(`register patial ${key}`);
+		handlebars.registerPartial(key, partials[key]);
+	});
+
+	await next();
+}) : hbsPartial(temPath,  temOptions).then((partials) => {
+	Object.keys(partials).forEach((key) => {
+		debug(`register patial ${key}`);
+		handlebars.registerPartial(key, partials[key]);
+	});
+});
 
 
 app.use(async (ctx, next) => {

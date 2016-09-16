@@ -3,11 +3,7 @@
 var user = {
 
 	list: async (ctx) => {
-		await ctx.render('user', {
-			partials: {
-				layout: 'layout'
-			}
-		});
+		await ctx.render('user')
 	}
 
 };

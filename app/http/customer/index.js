@@ -5,15 +5,12 @@ var customer = {
 
 
 
-		await ctx.render('a',
-			{
-				a: 'ablt-i--abc',
-				partials: {
-					layout: 'layout'
-				}
+		await ctx.render('a', {
+			a: 'ablt-i--abc',
+			x: {
+				m:'--------------'
 			}
-		)
-		.catch((e) => {
+		}) .catch((e) => {
 			console.log(e.stack);
 		});
 

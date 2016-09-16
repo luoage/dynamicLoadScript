@@ -77,11 +77,27 @@ as1().then( (data) => {
 });
 */
 
-var path = require('path');
-var glob = require('glob');
-var p = '/app/**/';
-console.log(p);
+/*
+var x = function() {
+	console.log(arguments);
 
-glob(p, {root:'./'}, (err, files) => {
-	console.log(files);
-});
+	setTimeout(function() {
+		console.log('11111111');
+
+		return 111;
+	}, 1111);
+};
+
+var m = async function() {
+	await x()
+};
+
+var x = function() {
+	var a = m();
+
+	console.log(a);
+};
+
+x();
+
+*/
