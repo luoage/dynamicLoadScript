@@ -2,13 +2,11 @@
 
 var customer = {
 	list: async function(ctx){
-		await ctx.render('a', {
-			a: '----',
+		await ctx.render('b', {
+			a: '----abc--ii',
 			x: {
-				m:'-------iii-------'
+				m:'---------'
 			}
-		}) .catch((e) => {
-			console.log(e.stack);
 		});
 
 	},
