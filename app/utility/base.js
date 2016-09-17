@@ -3,6 +3,9 @@
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
+import Debug from 'debug';
+
+var debug = Debug('shop');
 
 var base = {
 
@@ -55,6 +58,17 @@ var base = {
 
 				resolve(files);
 			});
+		});
+	},
+
+	watch: function(root) {
+		var files = glob.sync('./app/**/', {root: './'});
+
+		this.hotLoad(files, (eventType, filePath) => {
+			const route = path.resolve(root, './app/router.js');
+
+			this.clearCache(route);
+			debug(`${eventType} ${filePath}`);
 		});
 	}
 };

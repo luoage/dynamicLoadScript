@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha unitTest/js/ || true",
     "lint": "./node_modules/.bin/eslint --cache --cache-location=./.eslint-cache --color ./ && echo 'well done !' || true",
-    "dev": "node ./index || true",
+    "dev": "node ./index.js || true",
+    "debug": "DEBUG=shop node ./index.js || true",
     "build:dev": "./node_modules/.bin/webpack --config webpack.development.config.js || true"
   },
   "keywords": [

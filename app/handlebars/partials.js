@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import Debug from 'debug';
+import handlebars from 'handlebars';
 
 var debug = Debug('shop');
-
 
 
 let partials = {
@@ -11,39 +11,46 @@ let partials = {
 	test: 'test'
 };
 
+
 function readPartials(partials) {
 	var cache = {};
 	var pts = Object.keys(partials);
 
-	return function(temPath, options) {
-		return new Promise((resolve, reject) => {
+	var read = function(temPath, options) {
 
-			if (options.cache && Object.keys(cache).length) {
-				return resolve(cache);
-			}
+		var file;
+		var str;
 
-			var next = function(index) {
-				if(index === pts.length){
-					return resolve(cache);
-				}
+		if (options.cache && pts.length) {
+			return cache;
+		}
 
-				var file = path.resolve(temPath, partials[pts[index]])+'.hbs';
+		pts.forEach((value) => {
+			file = path.resolve(temPath, partials[value]) + '.' + options.extension;
 
-				fs.readFile(file, {encoding: 'utf8', flag: 'r'}, function(err, str) {
-					if(err) {
-						return reject(err);
-					}
+			str = fs.readFileSync(file, {encoding: 'utf8'});
 
-					debug('load partial ${file}');
+			debug(`load partial ${file}`);
 
-					cache[pts[index]] = str;
-
-					next(++index);
-				});
-			};
-
-			return next(0);
+			cache[value] = str;
 		});
+
+		return cache;
+	};
+
+	return function(temPath, options, next) {
+		let partials = read(temPath, options);
+
+		handlebars.partials = {};
+
+		Object.keys(partials).forEach((key) => {
+			debug(`register patial ${key}`);
+			handlebars.registerPartial(key, partials[key]);
+		});
+
+		if(next) {
+			return next();
+		}
 	};
 }
 
