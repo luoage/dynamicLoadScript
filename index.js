@@ -10,4 +10,4 @@ require('babel-polyfill');
 
 require('./app.js');
 
-//require('./app.test.js');
+// require('./app.test.js');

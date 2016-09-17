@@ -15,9 +15,7 @@ let partials = {
 function readPartials(partials) {
 	var cache = {};
 	var pts = Object.keys(partials);
-
 	var read = function(temPath, options) {
-
 		var file;
 		var str;
 
@@ -48,7 +46,7 @@ function readPartials(partials) {
 			handlebars.registerPartial(key, partials[key]);
 		});
 
-		if(next) {
+		if (next) {
 			return next();
 		}
 	};

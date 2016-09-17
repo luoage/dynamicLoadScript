@@ -6,8 +6,6 @@ import csrf from 'koa-csrf';
 import convert from 'koa-convert';
 import views from 'koa-views';
 import path from 'path';
-import Debug from 'debug';
-import glob from 'glob';
 
 import ub from './app/utility/base';
 import hbsPartial from './app/handlebars/partials';
@@ -22,7 +20,6 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const isDev = process.env.NODE_ENV === 'development';
 var app = new Koa();
-var debug = Debug('shop');
 var temPath = path.resolve(__dirname, 'template');
 var temOptions = {
 	map: {
